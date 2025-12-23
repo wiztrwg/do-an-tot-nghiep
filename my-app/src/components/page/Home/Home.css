@@ -139,82 +139,64 @@
   border-radius: 999px;
 }
 
-.home-guide__grid {
+.home-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  align-items: start;
 }
 
-.home-guide__card {
-  padding: 26px;
-  border-radius: 26px;
-  border: 2px solid transparent;
-  transition: 0.2s ease;
+.home-stats__copy {
+  display: grid;
+  gap: 14px;
+  color: #0f172a;
 }
 
-.home-guide__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 30px rgba(15, 23, 42, 0.08);
-}
-
-.home-guide__card h3 {
-  font-size: 22px;
+.home-stats__copy h3 {
+  font-size: 18px;
+  margin-top: 6px;
   font-weight: 800;
-  margin-bottom: 10px;
 }
 
-.home-guide__card p {
-  margin-bottom: 12px;
-  color: #1f2937;
-}
-
-.home-guide__card ul {
-  list-style: none;
-  padding: 0;
+.home-stats__copy ul {
+  padding-left: 18px;
   margin: 0;
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  color: #1f2937;
   font-weight: 600;
-  color: #0f172a;
-  font-size: 13px;
 }
 
-.home-guide__icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
+.home-stats__note {
+  color: #475569;
+  font-weight: 600;
+}
+
+.home-stats__grid {
   display: grid;
-  place-items: center;
-  color: #ffffff;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.home-stats__card {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+  box-shadow: 0 12px 22px rgba(15, 23, 42, 0.06);
+  display: grid;
+  gap: 8px;
+}
+
+.home-stats__card span {
   font-weight: 800;
-  margin-bottom: 16px;
+  color: #16a34a;
 }
 
-.home-guide__card--organic {
-  background: #dcfce7;
-  border-color: #bbf7d0;
-}
-
-.home-guide__card--organic .home-guide__icon {
-  background: #22c55e;
-}
-
-.home-guide__card--recyclable {
-  background: #dbeafe;
-  border-color: #bfdbfe;
-}
-
-.home-guide__card--recyclable .home-guide__icon {
-  background: #3b82f6;
-}
-
-.home-guide__card--residual {
-  background: #e2e8f0;
-  border-color: #cbd5f5;
-}
-
-.home-guide__card--residual .home-guide__icon {
-  background: #64748b;
+.home-stats__card p {
+  margin: 0;
+  color: #475569;
+  font-weight: 600;
 }
 
 .home-store {

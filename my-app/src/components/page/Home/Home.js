@@ -104,40 +104,53 @@ function Home() {
 
       <section id="phan-loai" className="home-guide">
         <div className="home-section-title home-section-title--center">
-          <span>Hướng dẫn</span>
-          <h2>Phân Loại Rác Tại Nguồn</h2>
+          <span>Thực trạng</span>
+          <h2>Rác Thải & Ô Nhiễm</h2>
           <div className="home-title-line"></div>
         </div>
 
-        <div className="home-guide__grid">
-          <div className="home-guide__card home-guide__card--organic">
-            <div className="home-guide__icon">HC</div>
-            <h3>Rác Hữu Cơ</h3>
-            <p>Thức ăn thừa, rau quả hư, lá cây, vỏ trứng...</p>
+        <div className="home-stats">
+          <div className="home-stats__copy">
+            <p>
+              Trong những năm gần đây, lượng rác thải sinh hoạt và công nghiệp
+              liên tục gia tăng do quá trình đô thị hóa, gia tăng dân số và tiêu
+              dùng. Theo các báo cáo môi trường, phần lớn rác thải chưa được
+              phân loại đúng cách, gây áp lực lớn lên hệ thống xử lý và dẫn đến
+              ô nhiễm đất, nước và không khí.
+            </p>
+            <h3>Một số thống kê đáng chú ý:</h3>
             <ul>
-              <li>Có thể ủ làm phân bón</li>
-              <li>Phân hủy tự nhiên nhanh</li>
+              <li>Lượng rác thải toàn cầu tăng đều qua từng năm</li>
+              <li>Rác nhựa chiếm tỷ lệ lớn và mất hàng trăm năm để phân hủy</li>
+              <li>Tỷ lệ rác được phân loại và tái chế còn ở mức thấp</li>
+              <li>
+                Ô nhiễm rác thải ảnh hưởng trực tiếp đến môi trường sống và sức
+                khỏe con người
+              </li>
             </ul>
+            <p className="home-stats__note">
+              Thực trạng này cho thấy nhu cầu cấp thiết của việc ứng dụng công
+              nghệ, đặc biệt là Trí tuệ nhân tạo, nhằm hỗ trợ phân loại rác và
+              nâng cao hiệu quả tái chế.
+            </p>
           </div>
-
-          <div className="home-guide__card home-guide__card--recyclable">
-            <div className="home-guide__icon">TC</div>
-            <h3>Rác Tái Chế</h3>
-            <p>Giấy báo, vỏ lon, chai nhựa, hộp kim loại...</p>
-            <ul>
-              <li>Thu gom để tái sản xuất</li>
-              <li>Giảm khai thác tài nguyên</li>
-            </ul>
-          </div>
-
-          <div className="home-guide__card home-guide__card--residual">
-            <div className="home-guide__icon">VC</div>
-            <h3>Rác Vô Cơ</h3>
-            <p>Khẩu trang, sành sứ vỡ, bỉm, băng vệ sinh...</p>
-            <ul>
-              <li>Không thể tái chế</li>
-              <li>Cần xử lý tập trung</li>
-            </ul>
+          <div className="home-stats__grid">
+            <div className="home-stats__card">
+              <span>Tăng trưởng rác thải</span>
+              <p>Lượng rác toàn cầu đang tăng nhanh cùng với đô thị hóa.</p>
+            </div>
+            <div className="home-stats__card">
+              <span>Rác nhựa khó phân hủy</span>
+              <p>Nhựa có vòng đời dài, gây tồn lưu hàng trăm năm.</p>
+            </div>
+            <div className="home-stats__card">
+              <span>Tái chế còn thấp</span>
+              <p>Nhiều loại rác chưa được phân loại đúng cách.</p>
+            </div>
+            <div className="home-stats__card">
+              <span>Ảnh hưởng sức khỏe</span>
+              <p>Ô nhiễm rác thải tác động trực tiếp đến môi trường sống.</p>
+            </div>
           </div>
         </div>
       </section>
