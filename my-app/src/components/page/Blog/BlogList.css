@@ -1,0 +1,24 @@
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 26px 16px;
+}
+
+.blog-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.blog-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}

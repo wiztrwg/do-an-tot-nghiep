@@ -1,0 +1,40 @@
+.about-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Inter", sans-serif;
+  color: #374151;
+  text-align: left;
+}
+
+.about-page h1 {
+  font-size: 32px;
+  color: #166534;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-section {
+  margin-top: 30px;
+}
+
+.about-section h2 {
+  font-size: 24px;
+  color: #166534;
+  margin-bottom: 10px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.about-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.about-section ul li {
+  margin-bottom: 8px;
+  font-size: 16px;
+}

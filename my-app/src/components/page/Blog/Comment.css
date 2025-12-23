@@ -1,0 +1,108 @@
+.fb-comment-box {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.fb-comment-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.fb-comment-content {
+  background: #f3f5f7;
+  padding: 12px 15px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.fb-comment-name {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.fb-comment-text {
+  margin-bottom: 5px;
+}
+
+.fb-comment-actions span {
+  color: #385898;
+  font-size: 13px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.fb-comment-actions span:hover {
+  text-decoration: underline;
+}
+
+.fb-comment-time {
+  color: gray;
+  cursor: default;
+}
+
+.fb-reply-box textarea {
+  margin-top: 8px;
+  width: 100%;
+  height: 60px;
+  padding: 6px;
+}
+
+.fb-reply-box button {
+  margin-top: 5px;
+}
+
+.fb-comment-replies {
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.fb-edit-box {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 5px;
+}
+
+.fb-edit-actions button {
+  margin-right: 7px;
+}
+
+.comment-form {
+  margin: 12px 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment-form textarea:focus {
+  border-color: #0f6fa8;
+  box-shadow: 0 0 0 3px rgba(15, 111, 168, 0.15);
+}
+
+.comment-form button {
+  align-self: flex-end;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0f9c63, #0f6fa8);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.comment-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 111, 168, 0.25);
+}

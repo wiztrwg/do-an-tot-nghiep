@@ -1,0 +1,46 @@
+.blog-create-container {
+  max-width: 760px;
+  margin: 40px auto 70px;
+  padding: 24px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.blog-form input,
+.blog-form textarea {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  font-family: inherit;
+}
+
+.blog-form textarea {
+  min-height: 160px;
+}
+
+.btn-submit {
+  align-self: flex-start;
+  padding: 12px 22px;
+  background: linear-gradient(120deg, #1fbf7c, #0f9c63);
+  color: #0b1727;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 16px 32px rgba(15, 156, 99, 0.28);
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+}
