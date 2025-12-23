@@ -6,6 +6,7 @@ function WasteClassification() {
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState([]);
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
@@ -46,7 +47,27 @@ function WasteClassification() {
       }
 
       const data = await response.json();
-      setResult(data.prediction);
+      const prediction = data.prediction;
+      setResult(prediction);
+      if (prediction?.label) {
+        const normalized = prediction.label.toLowerCase();
+        const displayLabel =
+          guidanceByLabel[normalized]?.title || prediction.label;
+        setHistory((prev) => [
+          {
+            id: Date.now(),
+            label: prediction.label,
+            displayLabel,
+            confidence:
+              typeof prediction.confidence === "number"
+                ? prediction.confidence
+                : 0,
+            time: new Date().toISOString(),
+            preview,
+          },
+          ...prev,
+        ]);
+      }
     } catch (error) {
       console.error("Lỗi dự đoán:", error);
       setResult({
@@ -68,41 +89,93 @@ function WasteClassification() {
     typeof result?.confidence === "number" ? result.confidence : 0;
   const confidencePercent = Math.max(0, Math.min(confidenceValue, 1)) * 100;
 
+  const guidanceByLabel = {
+    battery: {
+      title: "Pin, ắc quy",
+      handling:
+        "Không bỏ vào rác sinh hoạt. Thu gom riêng và mang đến điểm thu hồi pin/ắc quy hoặc trung tâm tái chế có xử lý chất thải nguy hại.",
+      reuse:
+        "Không tái chế tại nhà. Ưu tiên thu gom an toàn để tránh rò rỉ hóa chất.",
+    },
+    glass: {
+      title: "Thủy tinh",
+      handling:
+        "Rửa sạch, để khô và phân loại riêng. Bỏ vào thùng rác tái chế hoặc điểm thu gom thủy tinh.",
+      reuse:
+        "Có thể tận dụng làm lọ cắm hoa, hộp đựng, hoặc trang trí nếu không bị nứt vỡ.",
+    },
+    metal: {
+      title: "Kim loại",
+      handling:
+        "Làm sạch, loại bỏ thức ăn/dầu mỡ. Ép dẹt nếu có thể để tiết kiệm diện tích. Bỏ vào thùng tái chế kim loại.",
+      reuse:
+        "Tận dụng lon, hộp kim loại làm chậu cây, hộp bút hoặc đồ trang trí.",
+    },
+    organic: {
+      title: "Rác hữu cơ",
+      handling:
+        "Tách riêng, hạn chế lẫn nhựa/kim loại. Ưu tiên ủ phân compost hoặc bỏ vào thùng rác hữu cơ.",
+      reuse:
+        "Ủ phân hữu cơ cho cây trồng. Có thể dùng bã cà phê, vỏ trứng làm phân bón tự nhiên.",
+    },
+    paper: {
+      title: "Giấy",
+      handling:
+        "Giữ sạch và khô. Không trộn giấy dính dầu mỡ. Bỏ vào thùng tái chế giấy.",
+      reuse:
+        "Tái sử dụng làm giấy ghi chú, bọc quà, hoặc đồ thủ công (origami, collage).",
+    },
+    plastic: {
+      title: "Nhựa",
+      handling:
+        "Rửa sạch, để khô. Tháo nắp, bóp dẹt chai/lọ. Phân loại theo ký hiệu nhựa nếu có.",
+      reuse:
+        "Tái dùng chai/lọ làm chậu cây, hộp đựng. Hạn chế tái dùng với nhựa dùng một lần.",
+    },
+  };
+
+  const normalizedLabel =
+    typeof result?.label === "string" ? result.label.toLowerCase() : "";
+  const guidance = guidanceByLabel[normalizedLabel] || null;
+
+  const formatTime = (iso) => {
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleString("vi-VN");
+  };
+
   return (
     <div className="waste-classification">
-      <section className="wc-hero card">
-        <div className="wc-hero__label">AI phân loại</div>
-        <h1>Phân loại rác gọn gàng</h1>
-        <p>Giao diện tối giản: kéo thả ảnh, theo dõi trạng thái và xem kết quả rõ ràng.</p>
-        <div className="wc-hero__meta">
-          <div>
-            <span className="wc-dot wc-dot--green" />
-            Kéo thả hoặc chọn ảnh từ thiết bị
-          </div>
-          <div>
-            <span className="wc-dot wc-dot--blue" />
-            Trả về nhãn cùng độ tin cậy trực quan
-          </div>
-          <div>
-            <span className="wc-dot wc-dot--amber" />
-            Hoạt động tốt nhất với ảnh sáng rõ, ít nhiễu
-          </div>
+      <section className="wc-hero">
+        <div className="wc-hero__content">
+          <span className="wc-hero__badge">TRỢ LÝ AI PHÂN LOẠI RÁC</span>
+          <h1>
+            Phân loại rác thông minh
+            <br />
+            Cùng trợ lý AI ✨
+          </h1>
+          <p>
+            Sử dụng công nghệ thị giác máy tính để nhận diện rác thải nhanh chóng
+            và gợi ý các giải pháp tái chế bền vững.
+          </p>
+          <a className="wc-hero__cta" href="#wc-workspace">
+            Bắt đầu quét ngay ✨
+          </a>
         </div>
       </section>
 
-      <div className="wc-panels">
-        <section className="wc-panel wc-panel--upload card">
-          <div className="wc-panel__head">
-            <div>
-              <div className="wc-step">Bước 1</div>
-              <h2>Tải ảnh nhận diện</h2>
-              <p>Kéo thả hoặc chọn ảnh. Giao diện báo trạng thái khi ảnh sẵn sàng.</p>
+      <section className="wc-workspace" id="wc-workspace">
+        <div className="wc-workspace__inner">
+          <div className="wc-card wc-card--upload">
+            <div className="wc-card__title">
+              <span className="wc-icon" aria-hidden="true">
+                📷
+              </span>
+              <h2>Tải ảnh rác thải lên</h2>
             </div>
-            <div className="wc-pill">Tối ưu ảnh</div>
-          </div>
 
           <label
-            className={`wc-uploader ${selectedImage ? "wc-uploader--ready" : ""}`}
+            className={`wc-dropzone ${selectedImage ? "is-ready" : ""}`}
             htmlFor="wc-upload"
           >
             <input
@@ -111,138 +184,132 @@ function WasteClassification() {
               accept="image/*"
               onChange={handleImageChange}
             />
-            <div className="wc-uploader__icon">+</div>
-            <div>
-              <p className="wc-uploader__title">
-                {selectedImage ? "Ảnh đã sẵn sàng" : "Thả ảnh vào đây hoặc bấm để chọn"}
-              </p>
-              <p className="wc-uploader__hint">
-                Hỗ trợ PNG/JPG/JPEG. Đề xuất ảnh <strong>&lt; 5MB</strong>
-              </p>
-              {selectedImage && (
-                <p className="wc-file">{selectedImage.name}</p>
-              )}
-            </div>
+            {preview ? (
+              <div className="wc-dropzone__preview">
+                <img src={preview} alt="Xem trước" />
+              </div>
+            ) : (
+              <>
+                <div className="wc-dropzone__icon" aria-hidden="true">
+                  ⬆️
+                </div>
+                <div>
+                  <p className="wc-dropzone__title">Kéo thả ảnh vào đây</p>
+                  <p className="wc-dropzone__hint">
+                    AI sẽ tự động nhận diện rác thải ✨
+                  </p>
+                </div>
+              </>
+            )}
+            {selectedImage && <p className="wc-file">{selectedImage.name}</p>}
           </label>
 
-          {preview && (
-            <div className="wc-shot">
-              <div className="wc-shot__bar">
-                <span>Xem nhanh</span>
-                <span>{formatConfidence(confidenceValue)}</span>
-              </div>
-              <img src={preview} alt="Xem trước" />
-            </div>
-          )}
+          <button
+            className="wc-action"
+            onClick={handlePredict}
+            disabled={!selectedImage || loading}
+          >
+            {loading ? "Đang phân tích..." : "✨ Phân tích bằng AI"}
+          </button>
+        </div>
 
-          <div className="wc-panel__actions">
-            <button
-              className="wc-btn wc-btn--primary"
-              onClick={handlePredict}
-              disabled={!selectedImage || loading}
-            >
-              {loading ? "Đang phân tích..." : "Phân loại ngay"}
-            </button>
-            <button
-              className="wc-btn wc-btn--ghost"
-              onClick={handleReset}
-              disabled={!selectedImage && !preview && !result && !loading}
-            >
+          <div className="wc-card wc-card--result">
+            <div className="wc-result">
+              {loading && (
+                <div className="wc-result__state is-loading">
+                  <span className="wc-brain" aria-hidden="true" />
+                  AI đang phân tích ảnh...
+                </div>
+              )}
+
+              {!loading && result && (
+                <div className="wc-result__content">
+                  <div className="wc-result__label">{result.label}</div>
+                  <div className="wc-confidence">
+                    <span>Độ tin cậy</span>
+                    <div className="wc-progress">
+                      <div
+                        className="wc-progress__bar"
+                        style={{ width: `${confidencePercent}%` }}
+                      />
+                    </div>
+                    <span className="wc-confidence__value">
+                      {formatConfidence(confidenceValue)}
+                    </span>
+                  </div>
+                  <p className="wc-result__note">
+                    Nếu chưa hợp lý, thử chụp gần hơn hoặc đổi góc sáng hơn.
+                  </p>
+                  {guidance && (
+                    <div className="wc-guides">
+                      <div className="wc-guide-card">
+                        <div className="wc-guide__title">Hướng dẫn xử lý</div>
+                        <p>{guidance.handling}</p>
+                      </div>
+                      <div className="wc-guide-card wc-guide-card--alt">
+                        <div className="wc-guide__title">
+                          Ý tưởng tái chế ✨
+                        </div>
+                        <p>{guidance.reuse}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!loading && !result && (
+                <div className="wc-result__state">
+                  <span className="wc-brain" aria-hidden="true" />
+                  Hãy tải ảnh lên để AI bắt đầu công việc ✨
+                </div>
+              )}
+            </div>
+
+            <div className="wc-result__meta">
+              {result ? "Kết quả đã sẵn sàng" : "Chưa có ảnh để phân loại"}
+            </div>
+
+            <button className="wc-reset" onClick={handleReset}>
               Làm mới
             </button>
           </div>
+        </div>
+      </section>
 
-          <div className="wc-steps">
-            <div className="wc-step-item">
-              <span>01</span>
-              <p>Vật thể chiếm khung hình, không bị cắt.</p>
-            </div>
-            <div className="wc-step-item">
-              <span>02</span>
-              <p>Nền đơn giản, tránh bóng gắt hoặc ngược sáng.</p>
-            </div>
-            <div className="wc-step-item">
-              <span>03</span>
-              <p>Nhấn “Phân loại ngay” và xem kết quả trực tiếp.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="wc-panel wc-panel--result card">
-          <div className="wc-panel__head">
-            <div>
-              <div className="wc-step">Bước 2</div>
-              <h2>Kết quả nhận diện</h2>
-              <p>Trạng thái xử lý hiển thị trực tiếp, kèm thanh độ tin cậy dễ đọc.</p>
-            </div>
-            <div className="wc-pill wc-pill--status">
-              {loading ? "Đang xử lý" : result ? "Hoàn tất" : "Chờ ảnh"}
-            </div>
-          </div>
-
-          <div className="wc-status-line">
-            <div
-              className={`wc-status-chip ${
-                loading ? "is-loading" : result ? "is-done" : ""
-              }`}
-            >
-              {loading
-                ? "AI đang phân tích ảnh..."
-                : result
-                ? "Đã nhận diện xong"
-                : "Chưa có ảnh để phân loại"}
-            </div>
-            <div className="wc-status-hint">
-              {result
-                ? "Kiểm tra độ tin cậy và xác nhận."
-                : "Tải ảnh để bắt đầu phân tích."}
-            </div>
-          </div>
-
-          {result ? (
-            <div className="wc-result-box">
-              <div className="wc-result__label">{result.label}</div>
-              <div className="wc-confidence">
-                <span>Độ tin cậy</span>
-                <div className="wc-progress">
-                  <div
-                    className="wc-progress__bar"
-                    style={{ width: `${confidencePercent}%` }}
-                  />
-                </div>
-                <span className="wc-confidence__value">
-                  {formatConfidence(confidenceValue)}
-                </span>
-              </div>
-              <p className="wc-result__note">
-                Nếu chưa hợp lý, thử chụp gần hơn hoặc đổi góc sáng hơn.
-              </p>
+      <section className="wc-history">
+        <div className="wc-history__inner">
+          <h2>Lịch sử phân loại</h2>
+          <p>Theo dõi các lần phân loại gần đây để so sánh kết quả.</p>
+          {history.length === 0 ? (
+            <div className="wc-history__empty">
+              Chưa có lịch sử. Hãy phân loại một bức ảnh để bắt đầu.
             </div>
           ) : (
-            <div className="wc-placeholder">
-              <p>Chưa có ảnh. Tải ảnh để xem nhãn phân loại và độ tin cậy.</p>
-              <p className="wc-placeholder__note">
-                Mẹo: nền đơn giản, vật thể rõ ràng giúp AI phân loại chuẩn hơn.
-              </p>
+            <div className="wc-history__grid">
+              {history.map((item) => (
+                <div className="wc-history__card" key={item.id}>
+                  <div className="wc-history__thumb">
+                    {item.preview ? (
+                      <img src={item.preview} alt={item.displayLabel} />
+                    ) : (
+                      <span>Ảnh</span>
+                    )}
+                  </div>
+                  <div className="wc-history__info">
+                    <div className="wc-history__label">
+                      {item.displayLabel}
+                    </div>
+                    <div className="wc-history__meta">
+                      <span>{formatConfidence(item.confidence)}</span>
+                      <span>{formatTime(item.time)}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
-
-          <div className="wc-mini-grid">
-            <div className="wc-mini">
-              <h4>Trực quan</h4>
-              <p>Thanh tiến độ gọn gàng, dễ lướt mắt.</p>
-            </div>
-            <div className="wc-mini">
-              <h4>Trạng thái</h4>
-              <p>Chip trạng thái đổi màu theo từng bước.</p>
-            </div>
-            <div className="wc-mini">
-              <h4>Hướng dẫn</h4>
-              <p>Gợi ý chụp ảnh đặt ngay dưới kết quả.</p>
-            </div>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
