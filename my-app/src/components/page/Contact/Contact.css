@@ -1,39 +1,176 @@
-.contact-page {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: "Inter", sans-serif;
+.about-page {
+  background: #f7faf9;
+  color: #0f172a;
+}
+
+.about-hero {
+  background: linear-gradient(120deg, #0f6b3c, #1fbf7c);
+  color: #ffffff;
+}
+
+.about-hero__content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 20px 80px;
+  display: grid;
+  gap: 14px;
   text-align: center;
-  color: #374151;
 }
 
-.contact-page h1 {
-  font-size: 32px;
-  color: #166534;
-  margin-bottom: 10px;
+.about-pill {
+  justify-self: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.contact-page p {
+.about-hero h1 {
+  font-size: 38px;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.about-hero p {
+  margin: 0 auto;
+  max-width: 720px;
   font-size: 16px;
-  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* Form */
+.about-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.about-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+  display: grid;
+  gap: 8px;
+}
+
+.about-card--full {
+  grid-column: 1 / -1;
+}
+
+.about-card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.about-card p {
+  margin: 0;
+  font-size: 15px;
+  color: #475569;
+}
+
+.tech-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.tech-card {
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.tech-card span {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.tech-card small {
+  font-size: 12px;
+  color: #0f172a;
+  opacity: 0.7;
+}
+
+.tech-python {
+  background: #eef4ff;
+  border-color: #c7d8ff;
+}
+
+.tech-tensorflow {
+  background: #fff3e6;
+  border-color: #ffd8b5;
+}
+
+.tech-react {
+  background: #e6f7ff;
+  border-color: #bfe9ff;
+}
+
+.tech-node {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.tech-db {
+  background: #f8f0ff;
+  border-color: #e3ccff;
+}
+
+.tech-ai {
+  background: #fff8eb;
+  border-color: #ffe2b9;
+}
+
+.about-contact {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px 80px;
+  display: grid;
+  gap: 18px;
+}
+
+.about-contact__intro {
+  text-align: center;
+  display: grid;
+  gap: 6px;
+}
+
+.about-contact__intro h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.about-contact__intro p {
+  margin: 0;
+  color: #64748b;
+}
+
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 12px;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #d1fae5;
-  font-size: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe3ea;
+  font-size: 15px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
+  background: #ffffff;
 }
 
 .contact-form textarea {
@@ -42,24 +179,56 @@
 }
 
 .contact-form button {
-  background: #22c55e;
+  background: linear-gradient(120deg, #1fbf7c, #0f9c63);
   color: white;
   padding: 12px;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s ease;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.contact-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
 }
 
 .contact-form button:hover {
-  background: #16a34a;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 156, 99, 0.3);
 }
 
 .success-msg {
-  margin-top: 15px;
+  text-align: center;
+  margin-top: 6px;
   color: #166534;
   font-weight: 600;
+}
+
+.error-msg {
+  text-align: center;
+  margin-top: 6px;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .about-hero__content {
+    padding: 56px 18px 64px;
+  }
+
+  .about-hero h1 {
+    font-size: 30px;
+  }
+
+  .about-section {
+    padding: 32px 18px 0;
+  }
+
+  .about-contact {
+    padding: 40px 18px 64px;
+  }
 }

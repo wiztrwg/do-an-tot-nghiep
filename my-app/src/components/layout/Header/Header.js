@@ -41,23 +41,32 @@ function Header() {
           <NavLink to="/classify" className="eco-header-item">
             Phân loại AI
           </NavLink>
+          <NavLink to="/shop" className="eco-header-item">
+            Cửa hàng
+          </NavLink>
           <NavLink to="/blog" className="eco-header-item">
             Blog
           </NavLink>
-          <NavLink to="/shop" className="eco-header-item">
-            Gian hàng xanh
+          <NavLink to="/contact" className="eco-header-item">
+            About Us
           </NavLink>
           <NavLink to="/cart" className="eco-header-item eco-cart-link">
-            🛒
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="eco-cart-icon"
+            >
+              <path
+                fill="currentColor"
+                d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6.2 6l.8 4h10.5l1.6-4H6.2zM5.3 3H2v2h1.8l2.2 10.4c.1.7.7 1.1 1.4 1.1h10.6v-2H7.7l-.3-1.5H18c.6 0 1.1-.4 1.3-1l2-5.2c.2-.6-.2-1.3-.9-1.3H6.2L5.7 3.8C5.6 3.3 5 3 4.4 3z"
+              />
+            </svg>
           </NavLink>
           {user?.role === "admin" && (
             <NavLink to="/admin" className="eco-header-item">
               Admin
             </NavLink>
           )}
-          <NavLink to="/contact" className="eco-header-item">
-            Liên hệ
-          </NavLink>
 
           {!user && (
             <>
